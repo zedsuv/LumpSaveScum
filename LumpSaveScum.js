@@ -1,3 +1,5 @@
+console.log("LumpSaveScum loaded");
+
 const Config = {
     colors: {
         normal: "#ffffff",
