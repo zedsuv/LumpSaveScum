@@ -10,3 +10,31 @@ I will improve it. 😇
 | 🟨    | Golden          | `#ffe600` |
 | 🟥    | Meaty           | `#e92e0d` |
 | 🟧    | Caramelized     | `#e4882c` |
+
+## How to use
+
+You can load the mod in one of the following ways.
+
+### Browser Console
+
+Open your browser's Developer Tools (`F12`), switch to the **Console** tab, and paste:
+
+```js
+Game.LoadMod('https://zedsuv.github.io/LumpSaveScum/LumpSaveScum.js');
+```
+
+### Bookmarklet
+
+Create a new bookmark and use the following as its URL:
+
+```javascript
+javascript:(function(){Game.LoadMod('https://zedsuv.github.io/LumpSaveScum/LumpSaveScum.js');}());
+```
+
+### Cookie Clicker Mod Manager
+
+If you use the Cookie Clicker Mod Manager, register a new mod with the following URL:
+
+```text
+https://zedsuv.github.io/LumpSaveScum/LumpSaveScum.js
+```
