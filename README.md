@@ -38,3 +38,5 @@ If you use the Cookie Clicker Mod Manager, register a new mod with the following
 ```text
 https://zedsuv.github.io/LumpSaveScum/LumpSaveScum.js
 ```
+
+##
