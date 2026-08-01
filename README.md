@@ -17,7 +17,7 @@ You can load the mod in one of the following ways.
 
 ### Browser Console
 
-Open your browser's Developer Tools (`F12`), switch to the **Console** tab, and paste:
+Open your browser's Developer Tools (`F12`), make sure you are in **Console** tab, and paste:
 
 ```js
 Game.LoadMod('https://zedsuv.github.io/LumpSaveScum/LumpSaveScum.js');
