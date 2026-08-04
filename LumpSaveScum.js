@@ -1,5 +1,4 @@
-console.log("LumpSaveScum loaded");
-
+console.log("LumpSaveScum loaded"); // Probably better to be comment but better for testing and I am lazy to comment/uncomment.
 
 const LUMPS = {
     0: {
@@ -33,8 +32,13 @@ function updateCounterColor() {
 }
 
 
+// Extend the original Sugar Lump tooltip.
 const originalLumpTooltip = Game.lumpTooltip;
 function updateLumpTooltip() {
+
+    updateCounterColor(); // This call is here for 
+                          // 1) Handle Sugar Lump type changes made by third-party methods.
+                          // 2) Give players a way to refresh the counter color in case of any unexpected behavior.
 
     let html = originalLumpTooltip();
 
@@ -50,10 +54,15 @@ function updateLumpTooltip() {
     return html;
 }
  
-Game.lumpTooltip = updateLumpTooltip;
+Game.lumpTooltip = updateLumpTooltip; // Override the vanilla tooltip.
 
 
 const lumpsAmountElement = document.getElementById("lumpsAmount");
+updateCounterColor(); // Initial update after the mod is loaded.
 
+const originalComputeLumpType = Game.computeLumpType;
+Game.computeLumpType = function () {
+    originalComputeLumpType.apply(this, arguments);
 
-Game.registerHook("draw", updateCounterColor);
+    updateCounterColor();
+};
