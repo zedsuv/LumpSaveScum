@@ -54,22 +54,14 @@ const LumpSaveScum = {
         Game.lumpTooltip = this.updateLumpTooltip;
 
         // Initial update after the mod is loaded.
-        this.updateCounterColor();
+        // this.updateCounterColor();
 
         // Wrap Game.computeLumpType().
         Game.computeLumpType = function () {
             LumpSaveScum.originalComputeLumpType.apply(this, arguments);
 
-            LumpSaveScum.updateCounterColor();
+            // LumpSaveScum.updateCounterColor();
         };
-
-        // Add the mod's settings section to the Options menu.
-        Game.customOptionsMenu.push(function () {
-            CCSE.AppendCollapsibleOptionsMenu(
-                LumpSaveScum.menuName,
-                LumpSaveScum.getMenuString()
-            );
-        });        
 
         // Mod Loaded 👍🏻
         this.isLoaded = true;
@@ -98,53 +90,16 @@ const LumpSaveScum = {
 
         });
 
-        this.updateCounterColor();
+        // this.updateCounterColor();
 
     },
-    
-    /* ========== Settings ========== */
-
-    // Build the mod's section in the Options menu.
-    getMenuString() {
-        return /*html*/ `
-            <div class="listing">
-                <a id="lumpColorButton"
-                class="smallFancyButton prefButton option ${this.settings.updateCounterColorEnabled ? "" : "off"}"
-                onclick="LumpSaveScum.toggleCounterColor();">
-                    Counter Color ${this.settings.updateCounterColorEnabled ? "ON" : "OFF"}
-                </a>
-                <label>
-                    (changes the sugar lump counter color based on the current lump type)
-                </label>
-            </div>`;
-
-    },
-
-    
 
     /* ========== Helper Methods ========== */
 
-    
     // Toggle sugar lump counter color update.
     toggleCounterColor() {
 
         this.settings.updateCounterColorEnabled = !this.settings.updateCounterColorEnabled;
-
-        const button = document.getElementById("lumpColorButton");
-
-        if (button) {
-
-            button.innerHTML =
-                `Counter Color ${this.settings.updateCounterColorEnabled ? "ON" : "OFF"}`;
-
-            button.classList.toggle(
-                "off",
-                !this.settings.updateCounterColorEnabled
-            );
-
-        }
-
-        PlaySound('snd/tick.mp3');
 
         this.updateCounterColor();
 
@@ -160,8 +115,6 @@ const LumpSaveScum = {
             return;
         }
 
-        if (!this.lumpsAmountElement) return;
-
         const lump = LUMPS[Game.lumpCurrentType];
 
         if (!lump) return;
@@ -172,7 +125,7 @@ const LumpSaveScum = {
     // Extend the original Sugar Lump tooltip.
     updateLumpTooltip() {
 
-        LumpSaveScum.updateCounterColor();
+        // LumpSaveScum.updateCounterColor();
 
         let html = LumpSaveScum.originalLumpTooltip();
 
@@ -190,29 +143,14 @@ const LumpSaveScum = {
 };
 
 
-
-
 LumpSaveScum.launch = function () {
 
     Game.registerMod(LumpSaveScum.name, LumpSaveScum);
 
 };
 
-if (typeof CCSE === "undefined") {
-    Game.LoadMod("https://klattmose.github.io/CookieClicker/CCSE.js");
-}
-
 if (!LumpSaveScum.isLoaded) {
 
-    if (window.CCSE && CCSE.isLoaded) {
+    LumpSaveScum.launch();
 
-        LumpSaveScum.launch();
-
-    } else {
-
-        if (!window.CCSE) window.CCSE = {};
-        if (!window.CCSE.postLoadHooks) window.CCSE.postLoadHooks = [];
-
-        window.CCSE.postLoadHooks.push(LumpSaveScum.launch);
-    }
 }
